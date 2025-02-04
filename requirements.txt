@@ -1,0 +1,10 @@
+jupyter
+wandb
+openslide-python
+scikit-learn
+pandas
+h5py
+future
+verstack
+hydra-core==1.2.0 
+opencv-python

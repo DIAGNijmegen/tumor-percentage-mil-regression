@@ -1,0 +1,8 @@
+scores_path: '/path/to/instance_preds/or/attention_scores/'  # Path to the directory containing instance predictions or attention scores (e.g., .npy files).
+patches_path: '/path/to/patches/'                            # Path to the directory containing patch coordinates (e.g., .h5 files).
+n_fold: '0'                                                  # Identifier for the fold used in cross-validation (e.g., 0, 1, 2). Matches the naming pattern of score files.
+slides_path: '/path/to/images/*.tif'                         # Path to the directory containing slide images (e.g., .tif or .svs). 
+patch_size: 512                                              # Patch size at level 0 (highest resolution). 
+output_dir: '/path/to/output/'                               # Directory where the output heatmaps will be saved. 
+blur: True                                                   # Whether to apply Gaussian blur to the generated heatmaps. Set to True for smoother visualizations.
+percentiles: True                                            # Whether to normalize heatmap values to percentiles for better visualization. Set to True for normalized output.

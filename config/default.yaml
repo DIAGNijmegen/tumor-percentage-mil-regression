@@ -1,0 +1,64 @@
+settings:
+  max_epochs: 100               # Maximum number of training epochs
+  k: 5                          # Number of folds for cross-validation
+  k_start: 0                    # Starting fold for cross-validation
+  k_end: 1                      # Ending fold for cross-validation
+  batch_size: 1                 # Batch size for loading data
+  num_workers: 4                # Number of workers for data loading
+  n_classes: 1                  # Number of classes
+  seed: 1                       # Random seed for reproducibility
+  auc_score: False              # Whether to calculate AUC during evaluation (only allowed when negative cases are included)
+  bag_size: -1                  # Size of the bag (number of instances per bag); -1 indicates no limit
+  limits: [204000, 257000, 85000, 216000, 177000] # Used for WeSeg inference: highest number of patches for each fold
+  chunk_size: 500               # Used for WeSeg inference: Size of chunks for processing patches
+
+data:
+  split_dir: '/app/examples' # Directory for data splits
+  features_dirs:               # Directories containing pre-extracted features; if features are stored in multiple directories, list them here
+    - '/path/to/features/'
+  results_dir: '/path/to/to/output/' # Directory to save results
+  csv_path: '/app/examples/percentages.csv' # Path to input CSV file with dataset information (slide_id, label)
+  exp_code: 'run1_model1'    # Experiment code for identifying the run
+
+testing:
+  ckpt_path: '/path/to/s_0_checkpoint.pt' # Path to model checkpoint for testing
+  only_testing: False           # If True, skip training and only perform testing
+
+loss:
+  bag_loss: 'mse'               # Loss function for bags (e.g., 'mse' for mean squared error)
+  inst_loss: 'svm'              # Loss function for CLAM clustering loss 
+
+optimizer:
+  name: 'adam'                  # Optimizer name
+  lr: 2e-4                      # Learning rate for optimizer
+  wd: 1e-5                      # Weight decay (L2 regularization)
+
+lr_scheduler:
+  enable: False                 # Whether to use a learning rate scheduler
+  name:                         # Name of the learning rate scheduler (if enabled)
+  step_size:                    # Step size for step-based schedulers
+  gamma:                        # Decay factor for learning rate
+
+early_stopping:
+  enable: True                  # Whether to enable early stopping during training
+  patience: 20                  # Number of epochs to wait before stopping if no improvement
+  min_epoch: 50                 # Minimum number of epochs to run before early stopping can be triggered
+
+model:
+  type: 'abmil'                 # Model type (e.g., abmil, clam, meanpool, weseg)
+  based: 'instance'             # Whether the model is instance-based or embedding-based
+  size: 'resnet50'              # Backbone model size (e.g., 'resnet50')
+  drop_out: True                # Whether to use dropout in the model
+  dp_rate: 0.25                 # Dropout rate
+  bag_weight: 0.7               # Weight given to the bag loss (CLAM)
+  B: 8                          # Mumber of positive/negative patches to sample for CLAM
+  gated_attention: True         # Whether to use gated attention mechanism
+
+wandb:
+  enable: False                 # Whether to enable Weights & Biases for experiment tracking
+  project: 'project_name'   # Project name in Weights & Biases
+  exp_name: 'experiment_name' # Experiment name for tracking
+  username: username        # Username for Weights & Biases
+  dir: '/directory/logs'             # Directory for Weights & Biases logs
+  group:                        # Group name for organizing experiments
+  tags: []                      # Tags for the experiment
