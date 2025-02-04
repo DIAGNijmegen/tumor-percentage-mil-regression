@@ -35,8 +35,9 @@ docker build -t tumor-detection .
 `` 
 
 5. Once inside the Docker container, run the main script using the appropriate configuration file:
-python3 main.py --config-name name_config
 
+``python3 main.py --config-name name_config
+``
 ### 📊 Output and interpretability
 The model outputs include:
 
@@ -48,14 +49,15 @@ Instance-level predictions and attention scores can be visualized using heatmaps
 ### 🧪 Testing
 To test an existing checkpoint or evaluate the model:
 
-- Specify the ckpt_path in the configuration file under the testing section.
+- Specify the ``ckpt_path`` in the configuration file under the testing section.
 - Set ``only_testing: True`` to skip training and directly evaluate.
 
 ### 💡 Tips for Best Results
 To improve tumor detection performance and interpretability, consider using the _amplification technique_ introduced in our paper. This method was especially effective in:
 
-Datasets with biopsies or lymph nodes.
-Scenarios with small lesions or tumor-free cases, where differentiating between very small tumor percentages and negative slides is challenging.
+- Datasets with biopsies or lymph nodes.
+- Scenarios with small lesions or tumor-free cases, where differentiating between very small tumor percentages and negative slides is challenging.
+
 The amplification technique involves applying a transformation to the tumor area percentage targets during training. In our experiments, a fifth-root transformation was effective. However, you are encouraged to explore transformations that best suit your dataset.
 
 ### 📜 Additional scripts
